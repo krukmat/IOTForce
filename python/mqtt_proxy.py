@@ -20,7 +20,7 @@ def on_message(client, userdata, msg):
         #TODO: Caso donde se envia PlantId;valor de humedad
         if ";" in data:
             parameters = data.split(";")
-            result = sf.sobjects.Plant__c.upsert("PlantId__c", parameters[0], {"current__c": parameters[1]})
+            result = sf.sobjects.Plant__c.upsert("PlantId__c", parameters[0], {"current__c": parameters[1]}) #TODO: Platform events instead?
         else:
             # Caso que se recibe desde el ESP-32 para que se devuelva el valor desde SF
             if "PLANT" in data:

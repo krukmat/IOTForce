@@ -11,6 +11,7 @@ The stack selected:
     * ESP32
 * Software:         
     * Arduino IDE
+    * Python3 (Flask, SalesforceAPI)
 ## General Schema
 ![Schematics](https://github.com/krukmat/GardenForce-Demo/blob/159c5497d52ea9f4a9dd97e8ecaf703c78a2e915/images/GardenForce.jpeg)
 ##  Hardware
