@@ -1,0 +1,3 @@
+SF_USER = 'matias@kforce.com'
+SF_PASSWORD = 'P0pp3r2021'
+SF_ACCESS_TOKEN = 'PYhiewOJs1LfFBn1a1TXMU7W'
