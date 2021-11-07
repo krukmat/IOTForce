@@ -51,8 +51,8 @@ void mqttCallback(char* topic, byte* payload, unsigned int length){
     }else{
       String parameter = getValue(incoming,';',1);
       Serial.println(parameter);
-      if (parameter == "hidrate"){
-            Serial.println("hidrate");
+      if (parameter == "execute"){
+            Serial.println("execute");
             handle_hidrate();
             delay(flowMS);
       }

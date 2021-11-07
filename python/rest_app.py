@@ -24,11 +24,11 @@ def index():
         return 'OK'
     return 'KO'
 
-@app.route('/hidrate')
-def hidrate():
-    plantid = request.args.get('plant_id')
-    message = plantid + ";hidrate;0;MQTT"
-    if plantid:
+@app.route('/execute')
+def execute_task():
+    device_id = request.args.get('device_id')
+    message = device_id + ";execute;0;MQTT"
+    if device_id:
         client = mqtt_proxy.connect_mqtt()
         mqtt_proxy.mqtt_publish(client, message)
         return 'OK'

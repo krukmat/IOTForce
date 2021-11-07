@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Matias Kruk
  * @group             : 
- * @last modified on  : 10-03-2021
+ * @last modified on  : 11-07-2021
  * @last modified by  : Matias Kruk
  * Modifications Log 
  * Ver   Date         Author        Modification
@@ -60,7 +60,7 @@ public with sharing class RefreshPlantParametersCallout {
         HttpRequest request = new HttpRequest();
          
         // Provide the Named Credentials
-        request.setEndpoint('http://gardenforce.krukforce.com/rest/hidrate?plant_id='+plant);
+        request.setEndpoint('http://gardenforce.krukforce.com/rest/execute?device_id='+plant);
         request.setMethod('GET');        
         HttpResponse response = http.send(request);
         if (response.getStatusCode() == 200) {
