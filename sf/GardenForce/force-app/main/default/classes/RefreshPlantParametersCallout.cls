@@ -9,6 +9,15 @@
  * 1.0   05-19-2021   Matias Kruk   Initial Version
 **/
 public with sharing class RefreshPlantParametersCallout {
+    private static String generateRandomString(Integer len) {
+        final String chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+        String randStr = '';
+        while (randStr.length() < len) {
+           Integer idx = Math.mod(Math.abs(Crypto.getRandomInteger()), chars.length());
+           randStr += chars.substring(idx, idx+1);
+        }
+        return randStr; 
+    }
     @AuraEnabled(cacheable=true)
     public static String updatePlantMoist(String plant, Integer parameter) {
         Http http = new Http();
@@ -60,7 +69,7 @@ public with sharing class RefreshPlantParametersCallout {
         HttpRequest request = new HttpRequest();
          
         // Provide the Named Credentials
-        request.setEndpoint('http://gardenforce.krukforce.com/rest/execute?device_id='+plant);
+        request.setEndpoint('http://gardenforce.krukforce.com/rest/execute?device_id='+plant+'&rnd='+generateRandomString(10));
         request.setMethod('GET');        
         HttpResponse response = http.send(request);
         if (response.getStatusCode() == 200) {
