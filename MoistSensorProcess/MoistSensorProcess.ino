@@ -25,17 +25,22 @@ TaskHandle_t taskSendStatus;
 
 
 void mqttCallback(char* topic, byte* payload, unsigned int length){
-      int value = -1;
-      String parameter = mqttBaseCallback(deviceId, &value , topic, payload, length);
-      if (parameter == "moist"){
-          moistValue = value;
-       }
-       if (parameter == "read_ms")
-          readMs = value;
-       if (parameter == "flow_ms"){
-          flowMS = value;
-          defaultFlowMS = flowMS;
-       }
+      int value = getIntValue(deviceId, payload, length);
+      String parameter = getCommand(deviceId, topic, payload, length);
+      
+      if (value > 0){
+        Serial.println("New value: "+ String(value));
+        if (parameter == "moist"){
+            moistValue = value;
+         }
+         if (parameter == "read_ms")
+            readMs = value;
+         if (parameter == "flow_ms"){
+            Serial.println("New flow_ms:" + String(value));
+            flowMS = value;
+            defaultFlowMS = flowMS;
+         }        
+      }
       if (parameter == "hidrate"){
             Serial.println("execute");
             handle_hidrate();
@@ -119,6 +124,7 @@ void setup() {
 // in Blynk app writes values to the Virtual Pin 1
 void handle_hidrate(void)
 {
+  Serial.println(flowMS);
   digitalWrite(RELAY, 0);
   delay(flowMS);
   // 1 minuto - flowMS parado
