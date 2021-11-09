@@ -41,7 +41,7 @@ def on_message(client, userdata, msg):
             # TODO: reemplazar por Platform Events para evitar el limite de API
             # device_type, device_id, value
             device_type = parameters[0].split('_')[0] #PLANT
-            result = sf.sobjects.DeviceMessage__e.insert({"device_Id__c": parameters[0], "device_type": device_type, "value__c": parameters[1]}) #TODO: Platform events instead?
+            result = sf.sobjects.DeviceMessage__e.insert({"device_Id__c": parameters[0], "device_type__c": device_type, "value__c": parameters[1]}) #TODO: Platform events instead?
         else:
             # Caso que se recibe desde el ESP-32 para que se devuelva el valor desde SF
             # TODO: Pasar a funcion especifica de gardenforce
