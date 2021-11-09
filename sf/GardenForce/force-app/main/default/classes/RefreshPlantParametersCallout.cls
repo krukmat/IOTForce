@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Matias Kruk
  * @group             : 
- * @last modified on  : 11-07-2021
+ * @last modified on  : 11-09-2021
  * @last modified by  : Matias Kruk
  * Modifications Log 
  * Ver   Date         Author        Modification
@@ -15,7 +15,7 @@ public with sharing class RefreshPlantParametersCallout {
         HttpRequest request = new HttpRequest();
          
         // Provide the Named Credentials
-        request.setEndpoint('http://gardenforce.krukforce.com/rest/setup?plant_id='+plant+'&moist='+String.valueOf(parameter));
+        request.setEndpoint('http://gardenforce.krukforce.com/rest/setup?device_id='+plant+'&moist='+String.valueOf(parameter));
         request.setMethod('GET');        
         HttpResponse response = http.send(request);
         if (response.getStatusCode() == 200) {
@@ -30,7 +30,7 @@ public with sharing class RefreshPlantParametersCallout {
         HttpRequest request = new HttpRequest();
          
         // Provide the Named Credentials
-        request.setEndpoint('http://gardenforce.krukforce.com/rest/setup?plant_id='+plant+'&read_ms='+String.valueOf(parameter));
+        request.setEndpoint('http://gardenforce.krukforce.com/rest/setup?device_id='+plant+'&read_ms='+String.valueOf(parameter));
         request.setMethod('GET');        
         HttpResponse response = http.send(request);
         if (response.getStatusCode() == 200) {
@@ -45,7 +45,7 @@ public with sharing class RefreshPlantParametersCallout {
         HttpRequest request = new HttpRequest();
          
         // Provide the Named Credentials
-        request.setEndpoint('http://gardenforce.krukforce.com/rest/setup?plant_id='+plant+'&flow_ms='+String.valueOf(parameter));
+        request.setEndpoint('http://gardenforce.krukforce.com/rest/setup?device_id='+plant+'&flow_ms='+String.valueOf(parameter));
         request.setMethod('GET');        
         HttpResponse response = http.send(request);
         if (response.getStatusCode() == 200) {
