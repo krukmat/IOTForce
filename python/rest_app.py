@@ -9,7 +9,7 @@ app = Flask(__name__)
 def index():
     deviceid = request.args.get('device_id')
     for key in request.args.keys():
-        if key != 'device_id' and deviceid and request.args[key]:
+        if key != "device_id" and deviceid and request.args[key]:
             message = deviceid +  ";" +  key +';'+request.args[key] + ";MQTT"
             client = mqtt_proxy.connect_mqtt()
             mqtt_proxy.mqtt_publish(client, message)
