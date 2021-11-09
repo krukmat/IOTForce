@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/setup')
 def index():
-     deviceid = request.args.get('device_id')
+    deviceid = request.args.get('device_id')
     for key in request.args.keys():
         if deviceid and request.args[key]:
             message = deviceid +  ";" +  key +';'+request.args[key] + ";MQTT"
