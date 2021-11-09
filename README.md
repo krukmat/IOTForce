@@ -24,6 +24,7 @@ The stack selected:
 ![History](https://github.com/krukmat/GardenForce-Demo/blob/dab6476364e0883ef06dd59ba2e45e5e8e7263f6/images/salesforce-history.png)
 ![Report](https://github.com/krukmat/GardenForce-Demo/blob/dc64923d7f9524e4d4696be8e0405b1f2916938b/images/report.jpg)
 
+
 ## Reload secuence
 * (python folder) nohup python3 ./forever.py > gardenforce.log &
 * systemctl reload apache2
@@ -31,3 +32,7 @@ The stack selected:
        * cd /var/log/apache2/
        * cat access.log
        * cat error.log
+
+## More information about the framework: 
+-------------------------------------------------------
+* https://krukforce.com/our-vision-iotforce/
