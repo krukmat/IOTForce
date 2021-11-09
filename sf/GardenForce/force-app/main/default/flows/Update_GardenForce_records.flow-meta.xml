@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <decisions>
+        <name>Is_GardenForce</name>
+        <label>Is GardenForce?</label>
+        <locationX>791</locationX>
+        <locationY>92</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>It_s_GardenForce</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.device_type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>PLANT</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Plant_Record</targetReference>
+            </connector>
+            <label>It&apos;s GardenForce</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Update GardenForce records {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Update GardenForce records</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Plant_Record</name>
+        <label>Update Plant Record</label>
+        <locationX>797</locationX>
+        <locationY>413</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>PlantId__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.device_Id__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>current__c</field>
+            <value>
+                <elementReference>$Record.value__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Plant__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>188</locationX>
+        <locationY>54</locationY>
+        <connector>
+            <targetReference>Is_GardenForce</targetReference>
+        </connector>
+        <object>DeviceMessage__e</object>
+        <triggerType>PlatformEvent</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>
