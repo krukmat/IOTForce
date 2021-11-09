@@ -41,7 +41,7 @@ void mqttCallback(char* topic, byte* payload, unsigned int length){
             defaultFlowMS = flowMS;
          }        
       }
-      if (parameter == "hidrate"){
+      if (parameter == "execute"){
             Serial.println("execute");
             handle_hidrate();
             delay(flowMS);
