@@ -53,6 +53,33 @@ String getValue(String data, char separator, int index)
   return found>index ? data.substring(strIndex[0], strIndex[1]) : "";
 }
 
+String mqttBaseCallback(String deviceId, int* value , char* topic, byte* payload, unsigned int length){
+  String incoming = "";
+  Serial.print("Mensaje recibido desde -> ");
+  Serial.print(topic);
+  Serial.println("");
+  for (int i = 0; i < length; i++) {
+    incoming += (char)payload[i];
+  }
+  incoming.trim();
+  Serial.println("Mensaje -> " + incoming); 
+
+  if (getValue(incoming,';',0) == deviceId && getValue(incoming,';',3) == "MQTT"){
+    Serial.println("New valid message");
+    if (getValue(incoming,';',2).toInt() > 0){
+       value = (int*) getValue(incoming,';',2).toInt();
+       return getValue(incoming,';',1);
+    }else{
+      String param = getValue(incoming,';',1);
+      Serial.println(param);
+      if (param == "execute"){
+            return param;
+      }
+      return "";
+    }
+  }
+}
+
 void bootUp(const String deviceId , PubSubClient* mqttIPClient, const char* mqtt_ip, const int mqtt_ip_port, const char* mqtt_ip_user, const char* mqtt_ip_password, const char* mqtt_ip_topic_subscribe, const char* mqtt_ip_topic_publish, const int MQTT_RETRYMS){
   char msg[12];
   deviceId.toCharArray(msg,deviceId.length()+1);
