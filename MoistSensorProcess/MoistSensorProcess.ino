@@ -25,40 +25,23 @@ TaskHandle_t taskSendStatus;
 
 
 void mqttCallback(char* topic, byte* payload, unsigned int length){
-  String incoming = "";
-  Serial.print("Mensaje recibido desde -> ");
-  Serial.print(topic);
-  Serial.println("");
-  for (int i = 0; i < length; i++) {
-    incoming += (char)payload[i];
-  }
-  incoming.trim();
-  Serial.println("Mensaje -> " + incoming); 
-
-  if (getValue(incoming,';',0) == deviceId && getValue(incoming,';',3) == "MQTT"){
-    Serial.println("New valid message");
-    if (getValue(incoming,';',2).toInt() > 0){
-       String parameter = getValue(incoming,';',1);
-       if (parameter == "moist"){
-          moistValue = getValue(incoming,';',2).toInt();
+      int value = -1;
+      String parameter = mqttBaseCallback(deviceId, &value , topic, payload, length);
+      if (parameter == "moist"){
+          moistValue = value;
        }
        if (parameter == "read_ms")
-          readMs = getValue(incoming,';',2).toInt();
+          readMs = value;
        if (parameter == "flow_ms"){
-          flowMS = getValue(incoming,';',2).toInt();
+          flowMS = value;
           defaultFlowMS = flowMS;
        }
-    }else{
-      String parameter = getValue(incoming,';',1);
-      Serial.println(parameter);
-      if (parameter == "execute"){
+      if (parameter == "hidrate"){
             Serial.println("execute");
             handle_hidrate();
             delay(flowMS);
       }
-    }
-    //espRequestScreenshotToCam();
-  }
+
 }
 
 void taskSendStatusMethod( void * parameter) {
@@ -91,6 +74,7 @@ IPAddress secondaryDNS(8, 8, 4, 4);
 
 void setup() {
   // put your setup code here, to run once:
+  //WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); //disable brownout detector
   Serial.begin(115200);
   if (!WiFi.config(local_IP, gateway, subnet, primaryDNS, secondaryDNS)) {
     Serial.println("STA Failed to configure");
