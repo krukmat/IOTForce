@@ -11,12 +11,12 @@ def index():
     del request.args['device_id']
     int index = 0
     for key in request.args.keys():
-        if index>0 and deviceid and request.args[key]:
+        if deviceid and request.args[key]:
             message = deviceid +  ";" +  key +';'+request.args[key] + ";MQTT"
             client = mqtt_proxy.connect_mqtt()
             mqtt_proxy.mqtt_publish(client, message)
             index = index + 1
-            return 'OK'
+        return 'OK'
     return 'KO' 
 
 @app.route('/execute')
