@@ -24,7 +24,7 @@ public with sharing class RefreshPlantParametersCallout {
         HttpRequest request = new HttpRequest();
          
         // Provide the Named Credentials
-        request.setEndpoint('http://gardenforce.krukforce.com/rest/setup?device_id='+plant+'&moist='+String.valueOf(parameter));
+        request.setEndpoint('https://gardenforce.krukforce.com/rest/setup?device_id='+plant+'&moist='+String.valueOf(parameter));
         request.setMethod('GET');        
         HttpResponse response = http.send(request);
         if (response.getStatusCode() == 200) {
@@ -39,7 +39,7 @@ public with sharing class RefreshPlantParametersCallout {
         HttpRequest request = new HttpRequest();
          
         // Provide the Named Credentials
-        request.setEndpoint('http://gardenforce.krukforce.com/rest/setup?device_id='+plant+'&read_ms='+String.valueOf(parameter));
+        request.setEndpoint('https://gardenforce.krukforce.com/rest/setup?device_id='+plant+'&read_ms='+String.valueOf(parameter));
         request.setMethod('GET');        
         HttpResponse response = http.send(request);
         if (response.getStatusCode() == 200) {
@@ -54,7 +54,7 @@ public with sharing class RefreshPlantParametersCallout {
         HttpRequest request = new HttpRequest();
          
         // Provide the Named Credentials
-        request.setEndpoint('http://gardenforce.krukforce.com/rest/setup?device_id='+plant+'&flow_ms='+String.valueOf(parameter));
+        request.setEndpoint('https://gardenforce.krukforce.com/rest/setup?device_id='+plant+'&flow_ms='+String.valueOf(parameter));
         request.setMethod('GET');        
         HttpResponse response = http.send(request);
         if (response.getStatusCode() == 200) {
@@ -69,7 +69,7 @@ public with sharing class RefreshPlantParametersCallout {
         HttpRequest request = new HttpRequest();
          
         // Provide the Named Credentials
-        request.setEndpoint('http://gardenforce.krukforce.com/rest/execute?device_id='+plant+'&rnd='+generateRandomString(10));
+        request.setEndpoint('https://gardenforce.krukforce.com/rest/execute?device_id='+plant+'&rnd='+generateRandomString(10));
         request.setMethod('GET');        
         HttpResponse response = http.send(request);
         if (response.getStatusCode() == 200) {
